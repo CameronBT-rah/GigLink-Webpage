@@ -1,1 +1,53 @@
-/* CSS */
+/* Reset basic layout elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base body style for font setup */
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Main Navbar Wrapper */
+.navbar {
+  background-color: #1a1a1a;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Flexbox Layout Container */
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Horizontal Link List */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+/* individual Nav Links */
+.nav-links a {
+  color: #cccccc;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+/* Smooth Hover Effects */
+.nav-links a:hover {
+  color: #3498db;
+}
