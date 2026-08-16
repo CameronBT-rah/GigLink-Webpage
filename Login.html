@@ -11,7 +11,7 @@
     <h1>GigLink</h1>
     <hr>
 
-    <form action="action_page.php" method="post">
+<!--     <form action="action_page.php" method="post">
         <div class="imgcontainer">
             <img src="images/Profile example.jpg" alt="Avatar" class="avatar">
         </div>
@@ -34,6 +34,61 @@
             <span class="psw">Forgot <a href="#">password?</a></span>
         </div>
     </form>
+-->
+<div class="login-container">
+    <h2>Login</h2>
+    <form id="loginForm" onsubmit="validateLogin(event)">
+        <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter Username" required>
+        </div>
+        
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter Password" required>
+            <!-- Toggle Button added inside the input group -->
+            <button type="button" id="toggleBtn" class="toggle-password" onclick="togglePasswordVisibility()">Show</button>
+        </div>
+
+        <button type="submit" class="submit-btn">Log In</button>
+        <div id="errorMessage" class="error-message">Invalid username or password!</div>
+    </form>
+</div>
+
+<script>
+    // New function to handle the see password feature
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById('password');
+        const toggleBtn = document.getElementById('toggleBtn');
+
+        // Swap between text and password types
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleBtn.textContent = 'Hide';
+        } else {
+            passwordInput.type = 'password';
+            toggleBtn.textContent = 'Show';
+        }
+    }
+
+    // Original login validation function
+    function validateLogin(event) {
+        event.preventDefault();
+
+        const usernameInput = document.getElementById('username').value;
+        const passwordInput = document.getElementById('password').value;
+        const errorDiv = document.getElementById('errorMessage');
+
+        const correctUsername = "admin";
+        const correctPassword = "password123";
+
+        if (usernameInput === correctUsername && passwordInput === correctPassword) {
+            window.location.href = "index.html"; // Redirect to the main page after successful login
+        } else {
+            errorDiv.style.display = "block";
+        }
+    }
+</script>
 
 </body>
 
