@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GigLink - Home</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // Redirect to login if the user isn't logged in
+        if (localStorage.getItem("loggedIn") !== "true") {
+            window.location.href = "Login.html";
+        }
+    </script>
 </head>
 <body>
 
@@ -29,7 +35,7 @@
         <p>Whether you are a performer looking for a stage or a venue looking for talent, we have you covered.</p>
 
         <p>
-            <a href="Login.html"><button>Login / Sign Up</button></a>
+            <button id="logoutBtn" onclick="logout()">Log Out</button>
             <a href="Venue.html"><button>Browse Venues</button></a>
         </p>
     </main>
@@ -39,6 +45,13 @@
         <hr>
         <p>&copy; 2026 GigLink. Connecting live entertainment.</p>
     </footer>
+
+    <script>
+        function logout() {
+            localStorage.removeItem("loggedIn");
+            window.location.href = "Login.html";
+        }
+    </script>
 
 </body>
 </html>
