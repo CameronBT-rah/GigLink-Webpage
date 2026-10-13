@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,13 +13,14 @@
         }
     </script>
 </head>
+
 <body>
 
     <!-- Header -->
     <header class="top-nav-container">
         <h1>GigLink</h1>
         <ul>
-            <li><a href="Index.html">Home</a></li>
+            <li><a href="Index.html" class="active">Home</a></li>
             <li><a href="My Profile.html">My Profile</a></li>
             <li><a href="Availability.html">Availability</a></li>
             <li><a href="Bookings.html">Bookings</a></li>
@@ -28,30 +30,62 @@
 
     <!-- Main Content Area -->
     <main class="content-wrapper">
-        <h2>Welcome to GigLink</h2>
-        <p>GigLink is the ultimate platform connecting local musicians, bands, and performers with great live music venues.</p>
-        
-        <h3>Get Started</h3>
-        <p>Whether you are a performer looking for a stage or a venue looking for talent, we have you covered.</p>
 
-        <p>
-            <button id="logoutBtn" onclick="logout()">Log Out</button>
-            <a href="Venue.html"><button>Browse Venues</button></a>
-        </p>
+        <div class="session-bar">
+            <span class="welcome" id="welcomeMsg"></span>
+            <a id="logoutBtn" onclick="logout()">Log Out</a>
+        </div>
+
+        <!-- Hero -->
+        <section class="hero">
+            <h2>Welcome to GigLink</h2>
+            <p class="subtitle">
+                The platform connecting local musicians, bands, and performers with great live music venues —
+                find your next gig, or find your next act, in a few clicks.
+            </p>
+            <div class="hero-actions">
+                <a href="Venue.html"><button class="cta-btn primary">Browse Venues</button></a>
+                <a href="My Profile.html"><button class="cta-btn secondary">View My Profile</button></a>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features">
+            <div class="feature-card">
+                <h3>For Performers</h3>
+                <p>Build a profile, set your availability, and get discovered by venues looking for live talent.</p>
+            </div>
+            <div class="feature-card">
+                <h3>For Venues</h3>
+                <p>Browse performers by genre and availability, then book with confidence.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Effortless Booking</h3>
+                <p>Manage every gig — requests, confirmations, and schedules — from a single dashboard.</p>
+            </div>
+        </section>
+
     </main>
 
     <!-- Simple Footer -->
     <footer class="content-wrapper">
-        <hr>
+        <hr class="divider">
         <p>&copy; 2026 GigLink. Connecting live entertainment.</p>
     </footer>
 
     <script>
         function logout() {
             localStorage.removeItem("loggedIn");
+            localStorage.removeItem("username");
             window.location.href = "Login.html";
+        }
+
+        const storedName = localStorage.getItem("username");
+        if (storedName) {
+            document.getElementById("welcomeMsg").textContent = "Welcome, " + storedName;
         }
     </script>
 
 </body>
+
 </html>

@@ -5,39 +5,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GigLink - Availability</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        if (localStorage.getItem("loggedIn") !== "true") {
+            window.location.href = "Login.html";
+        }
+    </script>
 </head>
 <body>
- 
+
     <!-- Header -->
     <header class="top-nav-container">
         <h1>GigLink</h1>
         <ul>
             <li><a href="Index.html">Home</a></li>
             <li><a href="My Profile.html">My Profile</a></li>
-            <li><a href="Availability.html">Availability</a></li>
+            <li><a href="Availability.html" class="active">Availability</a></li>
             <li><a href="Bookings.html">Bookings</a></li>
             <li><a href="Venue.html">Venue</a></li>
         </ul>
     </header>
- 
+
     <!-- Main Content Area -->
     <main class="content-wrapper">
-        <h2>Availability</h2>
-        <p>Set the dates and times you're free to perform so venues can book you.</p>
- 
-        <h3>Your Calendar</h3>
-        <p>Interactive calendar goes here.</p>
- 
+
+        <div class="session-bar">
+            <span class="welcome" id="welcomeMsg"></span>
+            <a id="logoutBtn" onclick="logout()">Log Out</a>
+        </div>
+
+        <div class="page-header">
+            <h2>Availability</h2>
+            <p>Set the dates and times you're free to perform so venues can book you.</p>
+        </div>
+
+        <div class="section-block">
+            <h3>This Week</h3>
+            <div class="week-grid">
+                <div class="day-label">Mon</div>
+                <div class="day-label">Tue</div>
+                <div class="day-label">Wed</div>
+                <div class="day-label">Thu</div>
+                <div class="day-label">Fri</div>
+                <div class="day-label">Sat</div>
+                <div class="day-label">Sun</div>
+
+                <div class="day-cell">—</div>
+                <div class="day-cell">—</div>
+                <div class="day-cell available">Free</div>
+                <div class="day-cell">—</div>
+                <div class="day-cell available">Free</div>
+                <div class="day-cell available">Free</div>
+                <div class="day-cell">—</div>
+            </div>
+            <div class="legend">
+                <span><span class="legend-dot available"></span>Available</span>
+                <span><span class="legend-dot unavailable"></span>Unavailable</span>
+            </div>
+        </div>
+
         <p>
-            <a href="#"><button>Update Availability</button></a>
+            <a href="#"><button class="cta-btn primary">Update Availability</button></a>
         </p>
     </main>
- 
+
     <!-- Simple Footer -->
     <footer class="content-wrapper">
-        <hr>
+        <hr class="divider">
         <p>&copy; 2026 GigLink. Connecting live entertainment.</p>
     </footer>
- 
+
+    <script>
+        function logout() {
+            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("username");
+            window.location.href = "Login.html";
+        }
+
+        const storedName = localStorage.getItem("username");
+        if (storedName) {
+            document.getElementById("welcomeMsg").textContent = "Welcome, " + storedName;
+        }
+    </script>
+
 </body>
 </html>

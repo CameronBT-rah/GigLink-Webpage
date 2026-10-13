@@ -1,43 +1,90 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GigLink - My Profile</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        if (localStorage.getItem("loggedIn") !== "true") {
+            window.location.href = "Login.html";
+        }
+    </script>
 </head>
 <body>
- 
+
     <!-- Header -->
     <header class="top-nav-container">
         <h1>GigLink</h1>
         <ul>
             <li><a href="Index.html">Home</a></li>
-            <li><a href="My Profile.html">My Profile</a></li>
+            <li><a href="My Profile.html" class="active">My Profile</a></li>
             <li><a href="Availability.html">Availability</a></li>
             <li><a href="Bookings.html">Bookings</a></li>
             <li><a href="Venue.html">Venue</a></li>
         </ul>
     </header>
- 
+
     <!-- Main Content Area -->
     <main class="content-wrapper">
-        <h2>My Profile</h2>
-        <p>Manage the information venues and other musicians see about you.</p>
- 
-        <h3>Profile Details</h3>
-        <p>Name, instrument, genre, and bio go here.</p>
- 
+
+        <div class="session-bar">
+            <span class="welcome" id="welcomeMsg"></span>
+            <a id="logoutBtn" onclick="logout()">Log Out</a>
+        </div>
+
+        <div class="page-header">
+            <h2>My Profile</h2>
+            <p>Manage the information venues and other musicians see about you.</p>
+        </div>
+
+        <div class="section-block">
+            <h3>Profile Details</h3>
+            <div class="profile-card">
+                <div class="profile-avatar-placeholder" id="avatarInitial">?</div>
+                <div class="profile-info">
+                    <h4 id="profileName">Your Name</h4>
+                    <p>Lead Vocalist / Guitarist</p>
+                    <p>Based in Auckland, NZ</p>
+                    <div class="tag-list">
+                        <span class="tag">Indie Rock</span>
+                        <span class="tag">Acoustic</span>
+                        <span class="tag">Covers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-block">
+            <h3>Bio</h3>
+            <p>Add a short bio so venues get a sense of your style, experience, and the kind of gigs you're looking for.</p>
+        </div>
+
         <p>
-            <a href="#"><button>Edit Profile</button></a>
+            <a href="#"><button class="cta-btn primary">Edit Profile</button></a>
         </p>
     </main>
- 
+
     <!-- Footer -->
     <footer class="content-wrapper">
-        <hr>
+        <hr class="divider">
         <p>&copy; 2026 GigLink. Connecting live entertainment.</p>
     </footer>
- 
+
+    <script>
+        function logout() {
+            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("username");
+            window.location.href = "Login.html";
+        }
+
+        const storedName = localStorage.getItem("username");
+        if (storedName) {
+            document.getElementById("welcomeMsg").textContent = "Welcome, " + storedName;
+            document.getElementById("profileName").textContent = storedName;
+            document.getElementById("avatarInitial").textContent = storedName.charAt(0).toUpperCase();
+        }
+    </script>
+
 </body>
 </html>

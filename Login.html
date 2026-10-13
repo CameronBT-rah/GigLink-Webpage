@@ -1,69 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GigLink</title>
+    <title>GigLink - Log In</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+<body class="login-page">
 
-<body>
-    <h1>GigLink</h1>
-    <hr>
+    <div>
+        <div class="login-brand"><span>GigLink</span></div>
 
-    <!--     <form action="action_page.php" method="post">
-        <div class="imgcontainer">
-            <img src="images/Profile example.jpg" alt="Avatar" class="avatar">
-        </div>
+        <div class="login-card">
+            <h2>Log in to your account</h2>
+            <form id="loginForm" onsubmit="validateLogin(event)">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Enter Username" required>
+                </div>
 
-        <div class="container">
-            <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter Password" required>
+                    <button type="button" id="toggleBtn" class="toggle-password"
+                        onclick="togglePasswordVisibility()">Show</button>
+                </div>
 
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+                <button type="submit" class="submit-btn">Log In</button>
+                <div id="errorMessage" class="error-message">Invalid username or password</div>
+            </form>
 
-            <button type="submit">Login</button>
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
-        </div>
-
-        <div class="container" style="background-color:#f1f1f1">
-            <button type="button" class="cancelbtn">Cancel</button>
-            <span class="psw">Forgot <a href="#">password?</a></span>
-        </div>
-    </form>
--->
-    <div class="login-container">
-        <h2>Login</h2>
-        <form id="loginForm" onsubmit="validateLogin(event)">
-            <div class="input-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Enter Username" required>
+            <div class="login-hint">
+                Demo accounts — admin / password123<br>
+                or cameron / giglink2026
             </div>
-
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter Password" required>
-                <!-- Toggle Button added inside the input group -->
-                <button type="button" id="toggleBtn" class="toggle-password"
-                    onclick="togglePasswordVisibility()">Show</button>
-            </div>
-
-            <button type="submit" class="submit-btn">Log In</button>
-            <div id="errorMessage" class="error-message">Invalid username or password!</div>
-        </form>
+        </div>
     </div>
 
     <script>
-        // New function to handle the see password feature
+        // Show/hide password
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('password');
             const toggleBtn = document.getElementById('toggleBtn');
 
-            // Swap between text and password types
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 toggleBtn.textContent = 'Hide';
@@ -73,63 +52,31 @@
             }
         }
 
-        // Original login validation function
-        function validateLogin(event) {
-            event.preventDefault();
-
-            const usernameInput = document.getElementById('username').value;
-            const passwordInput = document.getElementById('password').value;
-            const errorDiv = document.getElementById('errorMessage');
-
-            const correctUsername = "admin";
-            const correctPassword = "password123";
-
-            if (usernameInput === correctUsername && passwordInput === correctPassword) {
-                window.location.href = "index.html"; // Redirect to the main page after successful login
-            } else {
-                errorDiv.style.display = "block";
-            }
-        }
+        // Demo account list — replaces the single hardcoded admin/password123 check.
+        // NOTE: this is still a client-side check, so it is NOT secure for real users
+        // or real passwords. Anyone can read this list by viewing the page source.
+        // A real login system needs a backend to verify credentials server-side.
+        const accounts = {
+            "admin": "password123",
+            "cameron": "giglink2026"
+        };
 
         function validateLogin(event) {
             event.preventDefault();
 
-            const usernameInput = document.getElementById('username').value;
+            const usernameInput = document.getElementById('username').value.trim();
             const passwordInput = document.getElementById('password').value;
             const errorDiv = document.getElementById('errorMessage');
 
-            const correctUsername = "admin";
-            const correctPassword = "password123";
-
-            if (usernameInput === correctUsername && passwordInput === correctPassword) {
-                localStorage.setItem("loggedIn", "true"); // Set the flag so other pages know the user is logged in
-                window.location.href = "Index.html"; // Redirect to the main page after successful login
-            } else {
-                errorDiv.style.display = "block";
-            }
-        }
-
-        function validateLogin(event) {
-            event.preventDefault();
-
-            const usernameInput = document.getElementById('username').value;
-            const passwordInput = document.getElementById('password').value;
-            const errorDiv = document.getElementById('errorMessage');
-
-            const correctUsername = "admin";
-            const correctPassword = "password123";
-
-            if (usernameInput === correctUsername && passwordInput === correctPassword) {
-                localStorage.setItem("loggedIn", "true"); // Set the flag so other pages know the user is logged in
-                window.location.href = "Index.html"; // Redirect to the main page after successful login
+            if (accounts.hasOwnProperty(usernameInput) && accounts[usernameInput] === passwordInput) {
+                localStorage.setItem("loggedIn", "true");
+                localStorage.setItem("username", usernameInput);
+                window.location.href = "Index.html";
             } else {
                 errorDiv.style.display = "block";
             }
         }
     </script>
 
-
-
 </body>
-
 </html>

@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GigLink - Bookings</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        if (localStorage.getItem("loggedIn") !== "true") {
+            window.location.href = "Login.html";
+        }
+    </script>
 </head>
 <body>
 
@@ -15,29 +20,77 @@
             <li><a href="Index.html">Home</a></li>
             <li><a href="My Profile.html">My Profile</a></li>
             <li><a href="Availability.html">Availability</a></li>
-            <li><a href="Bookings.html">Bookings</a></li>
+            <li><a href="Bookings.html" class="active">Bookings</a></li>
             <li><a href="Venue.html">Venue</a></li>
         </ul>
     </header>
 
     <!-- Main Content Area -->
     <main class="content-wrapper">
-        <h2>Bookings</h2>
-        <p>Track your upcoming and past gigs in one place.</p>
 
-        <h3>Your Bookings</h3>
-        <p>List of confirmed and pending bookings goes here.</p>
+        <div class="session-bar">
+            <span class="welcome" id="welcomeMsg"></span>
+            <a id="logoutBtn" onclick="logout()">Log Out</a>
+        </div>
+
+        <div class="page-header">
+            <h2>Bookings</h2>
+            <p>Track your upcoming and past gigs in one place.</p>
+        </div>
+
+        <div class="section-block">
+            <h3>Your Bookings</h3>
+            <table class="bookings-table">
+                <thead>
+                    <tr>
+                        <th>Venue</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>The Grey Lynn Lounge</td>
+                        <td>Oct 24, 2026</td>
+                        <td><span class="status-badge confirmed">Confirmed</span></td>
+                    </tr>
+                    <tr>
+                        <td>Ponsonby Social Club</td>
+                        <td>Nov 2, 2026</td>
+                        <td><span class="status-badge pending">Pending</span></td>
+                    </tr>
+                    <tr>
+                        <td>Britomart Live House</td>
+                        <td>Nov 15, 2026</td>
+                        <td><span class="status-badge confirmed">Confirmed</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <p>
-            <a href="Venue.html"><button>Find a Venue</button></a>
+            <a href="Venue.html"><button class="cta-btn primary">Find a Venue</button></a>
         </p>
     </main>
 
     <!-- Simple Footer -->
     <footer class="content-wrapper">
-        <hr>
+        <hr class="divider">
         <p>&copy; 2026 GigLink. Connecting live entertainment.</p>
     </footer>
+
+    <script>
+        function logout() {
+            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("username");
+            window.location.href = "Login.html";
+        }
+
+        const storedName = localStorage.getItem("username");
+        if (storedName) {
+            document.getElementById("welcomeMsg").textContent = "Welcome, " + storedName;
+        }
+    </script>
 
 </body>
 </html>
